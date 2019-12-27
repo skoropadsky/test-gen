@@ -41,33 +41,33 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
-    ],
-    "rules": {
-        "prettier/prettier": [
-            "warn",
-            {
-                "#": "https://prettier.io/docs/en/options.html",
-                "tabWidth": 4,
-                "printWidth": 160,
-                "preserve": "never"
-            }
-        ]
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)"
-        ],
-        "env": {
-          "mocha": true
+        "plugin:vue/essential",
+        "@vue/prettier"
+      ],
+      "rules": {
+          "prettier/prettier": [
+              "warn",
+              {
+                  "#": "https://prettier.io/docs/en/options.html",
+                  "tabWidth": 4,
+                  "printWidth": 160,
+                  "preserve": "never"
+              }
+          ]
+      },
+      "parserOptions": {
+        "parser": "babel-eslint"
+      },
+      "overrides": [
+        {
+          "files": [
+            "**/__tests__/*.{j,t}s?(x)"
+          ],
+          "env": {
+            "mocha": true
+          }
         }
-      }
-    ]
+      ]
   },
   "browserslist": [
     "> 1%",

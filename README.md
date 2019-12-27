@@ -1,11 +1,11 @@
 # test-gen
 
-# Task - Estimate/Real
-Base html structure of table with data loading - 3h / 3h
-Editing data in the table - 2h
-Draw graphic on click - 3h
-Switch data format on graphic - 2h
-Hiding rows from table - 2h
+## Task - Estimate/Real
+Base html structure of table with data loading - 3h / 3h <br />
+Editing data in the table - 2h / 2h <br />
+Draw graphic on click - 3h <br />
+Switch data format on graphic - 2h <br />
+Hiding rows from table - 2h <br />
 
 ## Project setup
 ```

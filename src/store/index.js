@@ -17,18 +17,32 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async loadTableData({ commit }) {
+        async loadTableData({ commit }, dates) {
             try {
-                let tableData = await Vue.axios.get("/data.json");
+                let tableData = await Vue.axios.get("/data.json", { params: { dates } });
                 commit("SET_TABLE_DATA", tableData.data);
             } catch (error) {
                 throw error;
             }
+        },
+        editMetric({ commit }, dataToEdit) {
+            // here must be request to backend to edit data
+            // if it was successful - commit changes to state
+            commit("EDIT_TABLE_DATA", dataToEdit);
         }
     },
     mutations: {
         SET_TABLE_DATA(state, tableData) {
             state.tableData = tableData;
+        },
+        EDIT_TABLE_DATA(state, dataToEdit) {
+            state.tableData.forEach(metric => {
+                if (metric.id === dataToEdit.id) {
+                    metric.metricData.forEach(data => {
+                        if (data.date === dataToEdit.date) data.value = dataToEdit.value;
+                    });
+                }
+            });
         }
     }
 });
