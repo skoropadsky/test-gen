@@ -1,5 +1,12 @@
 <template>
     <div class="tabel">
+        <form>
+            <span>Фильтр: </span>
+            <label v-for="metric of getMetrics" :key="metric.id">
+                <input type="checkbox" @click="filterTableMetrics(metric.id)" checked="on" />
+                {{ metric.metricName }}
+            </label>
+        </form>
         <table>
             <thead>
                 <tr>
@@ -53,10 +60,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getTableData","getFormatedDates"]),
+        ...mapGetters(["getTableData","getFormatedDates","getMetrics"])
     },
     methods: {
-        ...mapActions(["loadTableData","editMetric","drawChart"])
+        ...mapActions(["loadTableData","editMetric","drawChart","filterTableMetrics"])
     }
 };
 </script>
@@ -66,6 +73,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    margin: 20px auto 0 auto;
     tr {
         cursor: pointer;
         &.active {
@@ -87,6 +95,13 @@ table {
             border: none;
             text-align: center;
         }
+    }
+}
+form {
+    text-align: left;
+    label {
+        margin: 0 5px;
+        cursor: pointer;
     }
 }
 </style>

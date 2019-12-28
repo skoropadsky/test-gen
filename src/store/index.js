@@ -8,6 +8,7 @@ export default new Vuex.Store({
         dates: [new Date(2019, 11, 1), new Date(2019, 11, 5)],
         tableData: [],
         chartData: [],
+        metrics: []
     },
     getters: {
         getTableData(state) {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
                 addedDate = new Date(addedDate.setDate(addedDate.getDate() + 1));
             }
             return dates;
+        },
+        getMetrics(state) {
+            return state.metrics;
         }
     },
     actions: {
@@ -62,11 +66,16 @@ export default new Vuex.Store({
         drawChart({ commit }, id) {
             // here may be API-method to load data for current metric
             commit('SET_CHART_DATA', id);
+        },
+        filterTableMetrics({ commit }, id) {
+            // here may be API-method to hide metric
+            commit('FILTER_METRICS', id);
         }
     },
     mutations: {
         SET_TABLE_DATA(state, tableData) {
             state.tableData = tableData;
+            state.metrics = tableData;
         },
         EDIT_TABLE_DATA(state, dataToEdit) {
             state.tableData.forEach(metric => {
@@ -82,6 +91,17 @@ export default new Vuex.Store({
         },
         SET_CHART_DATA(state, id) {
             state.chartData = state.tableData.find(metric => metric.id === id).metricData || [];
+        },
+        FILTER_METRICS(state, id) {
+            let metric = state.tableData.find(metric => metric.id === id);
+            // if this metric exist in table data
+            if (metric) {
+                // remove metric from tableData
+                state.tableData = state.tableData.filter(metric => metric.id !== id);
+            } else {
+                // add metric to tableData
+                state.tableData.splice(id - 1, 0, state.metrics.find(metric => metric.id === id));
+            }
         }
     }
 });

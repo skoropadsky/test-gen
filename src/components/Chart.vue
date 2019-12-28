@@ -53,7 +53,7 @@ export default {
         getChartStyles() {
             return {
                 position: 'relative',
-                height: '500px',
+                height: '450px',
                 top: '20px',
                 margin: '0 auto 45px auto',
             }
