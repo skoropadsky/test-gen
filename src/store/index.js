@@ -20,6 +20,17 @@ export default new Vuex.Store({
         getCurrentChartData(state) {
             return state.chartData.map(metricData => metricData.value).reverse();
         },
+        getCurrentChartDifference(state) {
+            return state.chartData.map((metricData, i, arr) => {
+                // if we have data for previos day
+                if (arr[i+1]) {
+                    // calc difference between this day and previos
+                    return -(100 - (metricData.value / arr[i+1].value) * 100).toFixed(1);
+                } else {
+                    return 0;
+                }
+            }).reverse();
+        },
         getFormatedDates(state) {
             // convert dates to readable format
             let addedDate = state.dates[0];

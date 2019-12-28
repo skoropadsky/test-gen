@@ -1,5 +1,9 @@
 <template>
     <div class="chart">
+        <p>
+            <span @click="isChartCount = true" :class="{ active: isChartCount }">Количество</span> /
+            <span @click="isChartCount = false" :class="{ active: !isChartCount }">Разница</span>
+        </p>
         <BarChart
             :options="getChartOptions"
             :chart-data="getChartData"
@@ -10,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import BarChart from './BarChart.js';
 
 export default {
@@ -19,11 +23,10 @@ export default {
       BarChart
     },
     data: () => ({
+        isChartCount: true
     }),
-    async mounted() {
-    },
     computed: {
-        ...mapGetters(["getFormatedDates","getCurrentChartData"]),
+        ...mapGetters(["getFormatedDates","getCurrentChartData","getCurrentChartDifference"]),
         getChartOptions() {
             return {
                 responsive: true,
@@ -41,8 +44,8 @@ export default {
             return {
                 labels: this.getFormatedDates,
                 datasets: [{
-                    label: 'Количетво',
-                    data: this.getCurrentChartData,
+                    label: (this.isChartCount) ? 'Количетво' : 'Разница %',
+                    data: (this.isChartCount) ? this.getCurrentChartData : this.getCurrentChartDifference,
                     backgroundColor: '#2dd3aa',
                 }]
             }
@@ -55,9 +58,6 @@ export default {
                 margin: '0 auto 45px auto',
             }
         }
-    },
-    methods: {
-        ...mapActions([])
     }
 };
 </script>
@@ -65,5 +65,11 @@ export default {
 <style scoped lang="scss">
 .chart {
     width: 100%;
+}
+p span {
+    cursor: pointer;
+    &.active {
+        color: #2dd3aa;
+    }
 }
 </style>
