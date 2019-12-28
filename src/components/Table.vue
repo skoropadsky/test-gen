@@ -9,7 +9,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="metric of getTableData" :key="metric.id">
+                <tr
+                    v-for="metric of getTableData"
+                    :key="metric.id"
+                    @click="drawChart(metric.id); activeRow = metric.id"
+                    :class="(metric.id === activeRow) ? 'active': ''"
+                >
                     <td>{{ metric.metricName }}</td>
                     <td>{{ metric.difference }}</td>
                     <td v-for="data of metric.metricData" :key="data.date">
@@ -35,10 +40,11 @@ export default {
     data: () => ({
         tableHeaders: ["Показатель", "Разница %"],
         dates: [new Date(2019, 11, 1), new Date(2019, 11, 5)], // defalt deapason date
+        activeRow: 0,
         error: ""
     }),
     async mounted() {
-        this.tableHeaders = [...this.tableHeaders, ...this.getDates];
+        this.tableHeaders = [...this.tableHeaders, ...this.getFormatedDates.reverse()];
 
         try {
             await this.loadTableData(this.dates);
@@ -47,20 +53,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getTableData"]),
-        // convert dates to readable format
-        getDates() {
-            let addedDate = this.dates[1];
-            let dates = [];
-            while (addedDate >= this.dates[0]) {
-                dates.push(addedDate.getDate() + "/" + (addedDate.getMonth() + 1));
-                addedDate = new Date(addedDate.setDate(addedDate.getDate() - 1));
-            }
-            return dates;
-        }
+        ...mapGetters(["getTableData","getFormatedDates"]),
     },
     methods: {
-        ...mapActions(["loadTableData", "editMetric"])
+        ...mapActions(["loadTableData","editMetric","drawChart"])
     }
 };
 </script>
@@ -70,8 +66,18 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    td,
-    th {
+    tr {
+        cursor: pointer;
+        &.active {
+            color: #2dd3aa;
+            font-weight: 600;
+            input {
+                color: #2dd3aa;
+                font-weight: 600;
+            }
+        }
+    }
+    td, th {
         padding: 0;
         height: 40px;
         border: 1px solid #000;

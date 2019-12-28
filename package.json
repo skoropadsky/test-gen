@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "chart.js": "^2.9.3",
     "core-js": "^3.4.3",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.5",
+    "vue-chartjs": "^3.5.0",
     "vue-router": "^3.1.3",
     "vuex": "^3.1.2"
   },
@@ -41,33 +43,33 @@
       "node": true
     },
     "extends": [
-        "plugin:vue/essential",
-        "@vue/prettier"
-      ],
-      "rules": {
-          "prettier/prettier": [
-              "warn",
-              {
-                  "#": "https://prettier.io/docs/en/options.html",
-                  "tabWidth": 4,
-                  "printWidth": 160,
-                  "preserve": "never"
-              }
-          ]
-      },
-      "parserOptions": {
-        "parser": "babel-eslint"
-      },
-      "overrides": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "info",
         {
-          "files": [
-            "**/__tests__/*.{j,t}s?(x)"
-          ],
-          "env": {
-            "mocha": true
-          }
+          "#": "https://prettier.io/docs/en/options.html",
+          "tabWidth": 4,
+          "printWidth": 160,
+          "preserve": "never"
         }
       ]
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)"
+        ],
+        "env": {
+          "mocha": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
