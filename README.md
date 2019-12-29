@@ -1,4 +1,8 @@
 # test-gen
+1. Click on any row to draw chart for current data
+2. Click on any data field to edit. Press 'Enter' or select enother field to save changes
+3. Click any checkbox in 'Filter' line to hide or show metric from table
+4. On the top of the app - click 'Count' or 'Difference' to switch between data format.
 
 ## Task - Estimate/Real
 Base html structure of table with data loading - 3h / 3h <br />
