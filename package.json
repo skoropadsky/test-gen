@@ -38,8 +38,8 @@
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
-    "root": false,
-    "env": {
+      "root": false,
+      "env": {
       "node": true
     },
     "extends": [
@@ -48,11 +48,11 @@
     ],
     "rules": {
       "prettier/prettier": [
-        "info",
+        "warn",
         {
           "#": "https://prettier.io/docs/en/options.html",
           "tabWidth": 4,
-          "printWidth": 160,
+          "printWidth": 120,
           "preserve": "never"
         }
       ]

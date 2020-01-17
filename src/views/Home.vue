@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
-    <Chart />
-    <Table />
-  </div>
+    <div class="home">
+        <Chart />
+        <Table />
+    </div>
 </template>
 
 <script>
@@ -11,18 +11,18 @@ import Table from "@/components/Table.vue";
 import Chart from "@/components/Chart.vue";
 
 export default {
-  name: "home",
-  components: {
-    Table,
-    Chart
-  }
+    name: "home",
+    components: {
+        Table,
+        Chart
+    }
 };
 </script>
 
 <style scoped lang="scss">
 .home {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 </style>

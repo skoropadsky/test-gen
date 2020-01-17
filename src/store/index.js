@@ -22,15 +22,17 @@ export default new Vuex.Store({
             return state.chartData.map(metricData => metricData.value).reverse();
         },
         getCurrentChartDifference(state) {
-            return state.chartData.map((metricData, i, arr) => {
-                // if we have data for previos day
-                if (arr[i+1]) {
-                    // calc difference between this day and previos
-                    return -(100 - (metricData.value / arr[i+1].value) * 100).toFixed(1);
-                } else {
-                    return 0;
-                }
-            }).reverse();
+            return state.chartData
+                .map((metricData, i, arr) => {
+                    // if we have data for previos day
+                    if (arr[i + 1]) {
+                        // calc difference between this day and previos
+                        return -(100 - (metricData.value / arr[i + 1].value) * 100).toFixed(1);
+                    } else {
+                        return 0;
+                    }
+                })
+                .reverse();
         },
         getFormatedDates(state) {
             // convert dates to readable format
@@ -65,11 +67,11 @@ export default new Vuex.Store({
         },
         drawChart({ commit }, id) {
             // here may be API-method to load data for current metric
-            commit('SET_CHART_DATA', id);
+            commit("SET_CHART_DATA", id);
         },
         filterTableMetrics({ commit }, id) {
             // here may be API-method to hide metric
-            commit('FILTER_METRICS', id);
+            commit("FILTER_METRICS", id);
         }
     },
     mutations: {
@@ -100,7 +102,11 @@ export default new Vuex.Store({
                 state.tableData = state.tableData.filter(metric => metric.id !== id);
             } else {
                 // add metric to tableData
-                state.tableData.splice(id - 1, 0, state.metrics.find(metric => metric.id === id));
+                state.tableData.splice(
+                    id - 1,
+                    0,
+                    state.metrics.find(metric => metric.id === id)
+                );
             }
         }
     }

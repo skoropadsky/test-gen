@@ -19,8 +19,11 @@
                 <tr
                     v-for="metric of getTableData"
                     :key="metric.id"
-                    @click="drawChart(metric.id); activeRow = metric.id"
-                    :class="(metric.id === activeRow) ? 'active': ''"
+                    @click="
+                        drawChart(metric.id);
+                        activeRow = metric.id;
+                    "
+                    :class="metric.id === activeRow ? 'active' : ''"
                 >
                     <td>{{ metric.metricName }}</td>
                     <td>{{ metric.difference }}</td>
@@ -60,10 +63,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getTableData","getFormatedDates","getMetrics"])
+        ...mapGetters(["getTableData", "getFormatedDates", "getMetrics"])
     },
     methods: {
-        ...mapActions(["loadTableData","editMetric","drawChart","filterTableMetrics"])
+        ...mapActions(["loadTableData", "editMetric", "drawChart", "filterTableMetrics"])
     }
 };
 </script>
@@ -85,7 +88,8 @@ table {
             }
         }
     }
-    td, th {
+    td,
+    th {
         padding: 0;
         height: 40px;
         border: 1px solid #000;
